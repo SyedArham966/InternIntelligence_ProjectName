@@ -1,10 +1,26 @@
 import numpy as np
+import tensorflow as tf
+import random
 from sklearn.datasets import load_digits
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import InputLayer, Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from tensorflow.keras.layers import (
+    InputLayer,
+    Conv2D,
+    MaxPooling2D,
+    Flatten,
+    Dense,
+    Dropout,
+)
 from tensorflow.keras.optimizers import Adam
+
+
+def set_seed(seed: int = 42):
+    """Seed NumPy, TensorFlow, and Python's random for reproducibility."""
+    np.random.seed(seed)
+    tf.random.set_seed(seed)
+    random.seed(seed)
 
 
 def load_data(test_size: float = 0.2, val_size: float = 0.25):
@@ -34,7 +50,7 @@ def build_model():
             MaxPooling2D(pool_size=(2, 2)),
             Flatten(),
             Dense(64, activation="relu"),
-            Dropout(0.5),
+            Dropout(0.3),
             Dense(10, activation="softmax"),
         ]
     )
@@ -71,6 +87,7 @@ def evaluate_model(model, X_test, y_test):
 
 
 def main():
+    set_seed()
     X_train, X_val, X_test, y_train, y_val, y_test = load_data()
     model = build_model()
     train_model(model, X_train, y_train, X_val, y_val)
