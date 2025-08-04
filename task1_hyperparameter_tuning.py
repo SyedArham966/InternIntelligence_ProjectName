@@ -3,10 +3,12 @@ from __future__ import annotations
 
 from typing import Dict, Tuple
 
+import os
 import numpy as np
+import pandas as pd
 from sklearn.datasets import load_breast_cancer
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
@@ -58,8 +60,8 @@ def tune_model(name: str, estimator: object, param_grid: Dict[str, list], X_trai
     return search
 
 
-def evaluate(model, X_test: np.ndarray, y_test: np.ndarray) -> Dict[str, float]:
-    """Evaluate the model on the test set."""
+def evaluate(model, X_test: np.ndarray, y_test: np.ndarray) -> Tuple[Dict[str, float], np.ndarray]:
+    """Evaluate the model on the test set and return metrics and predictions."""
     preds = model.predict(X_test)
     metrics = {
         "accuracy": accuracy_score(y_test, preds),
@@ -67,16 +69,20 @@ def evaluate(model, X_test: np.ndarray, y_test: np.ndarray) -> Dict[str, float]:
         "recall": recall_score(y_test, preds),
         "f1": f1_score(y_test, preds),
     }
-    return metrics
+    return metrics, preds
 
 
 def main() -> None:
     X_train, X_test, y_train, y_test = load_data()
     spaces = get_search_spaces()
     results = {}
+    os.makedirs("predictions", exist_ok=True)
     for name, (estimator, grid) in spaces.items():
         search = tune_model(name, estimator, grid, X_train, y_train)
-        metrics = evaluate(search.best_estimator_, X_test, y_test)
+        metrics, preds = evaluate(search.best_estimator_, X_test, y_test)
+        out_path = os.path.join("predictions", f"{name.lower()}_predictions.csv")
+        pd.DataFrame({"actual": y_test, "predicted": preds}).to_csv(out_path, index=False)
+        print(f"Saved predictions to {out_path}")
         results[name] = {"best_params": search.best_params_, "metrics": metrics}
         print(f"Test metrics for {name}: {metrics}\n")
 
