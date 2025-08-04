@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import pandas as pd
 from sklearn.datasets import load_digits
@@ -60,12 +61,14 @@ def train_model(model, X_train, y_train, X_val, y_val, epochs: int = 20, batch_s
     return history
 
 
-def evaluate_model(model, X_test, y_test, pred_path: str = "task2_digits_predictions.csv"):
+def evaluate_model(model, X_test, y_test, pred_path: str = os.path.join("predictions", "digits_predictions.csv")):
     """Evaluate the trained model on the test set, print metrics, and save predictions."""
     loss, accuracy = model.evaluate(X_test, y_test, verbose=0)
     probs = model.predict(X_test)
     y_pred = np.argmax(probs, axis=1)
+    os.makedirs(os.path.dirname(pred_path), exist_ok=True)
     pd.DataFrame({"actual": y_test, "predicted": y_pred}).to_csv(pred_path, index=False)
+    print(f"Saved predictions to {pred_path}")
     report = classification_report(y_test, y_pred)
     cm = confusion_matrix(y_test, y_pred)
     print(f"Test accuracy: {accuracy:.4f}")

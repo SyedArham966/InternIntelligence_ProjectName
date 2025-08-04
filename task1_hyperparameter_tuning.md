@@ -25,4 +25,4 @@ Two classifiers were tuned using `GridSearchCV` with 5-fold cross validation and
 
 The Support Vector Classifier with a linear kernel achieved the best performance on the hold‑out test set, surpassing the Random Forest in all evaluated metrics.
 
-Prediction outputs for the test set are saved in `randomforest_predictions.csv` and `svc_predictions.csv` for external accuracy verification.
+Prediction outputs for the test set are saved in `predictions/randomforest_predictions.csv` and `predictions/svc_predictions.csv` for external accuracy verification.

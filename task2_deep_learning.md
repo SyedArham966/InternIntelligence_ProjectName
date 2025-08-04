@@ -22,7 +22,7 @@ Evaluated on the 360‑image test set:
 - **Accuracy**: 0.986
 - The classification report and confusion matrix are printed by `task2_digits_cnn.py`.
 
-Predicted and true labels for the test set are written to `task2_digits_predictions.csv` to allow real‑time accuracy checks.
+Predicted and true labels for the test set are written to `predictions/digits_predictions.csv` to allow real‑time accuracy checks.
 
 ## Usage
 ```bash

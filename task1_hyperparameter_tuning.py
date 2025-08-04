@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from typing import Dict, Tuple
 
+import os
 import numpy as np
 import pandas as pd
 from sklearn.datasets import load_breast_cancer
@@ -75,12 +76,13 @@ def main() -> None:
     X_train, X_test, y_train, y_test = load_data()
     spaces = get_search_spaces()
     results = {}
+    os.makedirs("predictions", exist_ok=True)
     for name, (estimator, grid) in spaces.items():
         search = tune_model(name, estimator, grid, X_train, y_train)
         metrics, preds = evaluate(search.best_estimator_, X_test, y_test)
-        pd.DataFrame({"actual": y_test, "predicted": preds}).to_csv(
-            f"{name.lower()}_predictions.csv", index=False
-        )
+        out_path = os.path.join("predictions", f"{name.lower()}_predictions.csv")
+        pd.DataFrame({"actual": y_test, "predicted": preds}).to_csv(out_path, index=False)
+        print(f"Saved predictions to {out_path}")
         results[name] = {"best_params": search.best_params_, "metrics": metrics}
         print(f"Test metrics for {name}: {metrics}\n")
 

@@ -6,12 +6,12 @@ This repository contains two machine‑learning exercises:
    ```bash
    python task1_hyperparameter_tuning.py
    ```
-   This script writes prediction files (`randomforest_predictions.csv` and `svc_predictions.csv`) containing true and predicted labels for the test set.
+   Prediction files are written to `predictions/randomforest_predictions.csv` and `predictions/svc_predictions.csv`.
 2. **Task 2 – Deep‑learning Model**: trains a small CNN on the scikit‑learn Digits dataset. Execute with:
    ```bash
    python task2_digits_cnn.py
    ```
-   The script saves test‑set predictions to `task2_digits_predictions.csv` for external verification.
+   Test‑set predictions are saved to `predictions/digits_predictions.csv` for external verification.
 
 Install dependencies with:
 ```bash
