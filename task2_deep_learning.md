@@ -1,30 +1,30 @@
-# Task 2 – Digits CNN
+# Task 2 – CIFAR-10 CNN
 
-This task trains a small convolutional neural network on the scikit‑learn **Digits** dataset (1 797 grayscale images of handwritten digits, each 8×8 pixels).
+This task trains a convolutional neural network on the **CIFAR-10** dataset (60 000 colour images of 10 object classes, each 32×32 pixels).
 
 ## Model architecture
-- Input: 8×8×1 images
+- Input: 32×32×3 images
 - Two 3×3 convolutional layers with ReLU activations, each followed by 2×2 max‑pooling
-- Flatten layer and a 64‑unit dense layer with ReLU
+- Flatten layer and a 128‑unit dense layer with ReLU
 - Dropout (0.5) for regularization
-- Output: 10‑unit softmax layer for digit classes
+- Output: 10‑unit softmax layer for the CIFAR‑10 classes
 
 The model uses the Adam optimizer and `sparse_categorical_crossentropy` loss.
 
 ## Training
-- Data split: 60 % train, 20 % validation, 20 % test
-- Normalization: pixel values scaled to [0, 1] by dividing by 16
-- Batch size: 32
-- Epochs: 20
+- Training/validation/test split: 80 %/20 % from the 50 000 training images, plus the 10 000‑image test set
+- Normalization: pixel values scaled to the [0, 1] range
+- Batch size: 64
+- Epochs: 5
 
 ## Results
-Evaluated on the 360‑image test set:
-- **Accuracy**: 0.986
-- The classification report and confusion matrix are printed by `task2_digits_cnn.py`.
+Evaluated on the 10 000‑image test set:
+- **Accuracy**: *(see console output; typically ~0.7 after 5 epochs)*
+- The classification report and confusion matrix are printed by `task2_cifar10_cnn.py`.
 
-Predicted and true labels for the test set are written to `predictions/digits_predictions.csv` to allow real‑time accuracy checks.
+Predicted and true labels for the test set are written to `predictions/cifar10_predictions.csv` for external accuracy checks.
 
 ## Usage
 ```bash
-python task2_digits_cnn.py
+python task2_cifar10_cnn.py
 ```

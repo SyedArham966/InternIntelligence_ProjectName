@@ -7,11 +7,11 @@ This repository contains two machine‑learning exercises:
    python task1_hyperparameter_tuning.py
    ```
    Prediction files are written to `predictions/randomforest_predictions.csv` and `predictions/svc_predictions.csv`.
-2. **Task 2 – Deep‑learning Model**: trains a small CNN on the scikit‑learn Digits dataset. Execute with:
+2. **Task 2 – Deep‑learning Model**: trains a small CNN on the CIFAR‑10 dataset. Execute with:
    ```bash
-   python task2_digits_cnn.py
+   python task2_cifar10_cnn.py
    ```
-   Test‑set predictions are saved to `predictions/digits_predictions.csv` for external verification.
+   Test‑set predictions are saved to `predictions/cifar10_predictions.csv` for external verification.
 
 Install dependencies with:
 ```bash
