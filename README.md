@@ -2,12 +2,12 @@
 
 This repository contains two machine‑learning exercises:
 
-1. **Task 1 – Hyperparameter Tuning**: uses the Breast Cancer Wisconsin dataset to compare a Random Forest and SVC. Run with:
+1. **Task 1 – Hyperparameter Tuning**: uses the Breast Cancer Wisconsin dataset to compare a Random Forest and SVC. Run with:
    ```bash
    python task1_hyperparameter_tuning.py
    ```
    Prediction files are written to `predictions/randomforest_predictions.csv` and `predictions/svc_predictions.csv`.
-2. **Task 2 – Deep‑learning Model**: trains a small CNN on the CIFAR‑10 dataset. Execute with:
+2. **Task 2 – Deep‑learning Model**: trains a small CNN on the CIFAR‑10 dataset. Execute with:
    ```bash
    python task2_cifar10_cnn.py
    ```

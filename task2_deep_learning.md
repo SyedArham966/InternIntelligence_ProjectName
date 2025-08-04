@@ -13,7 +13,7 @@ The model uses the Adam optimizer and `sparse_categorical_crossentropy` loss.
 
 ## Training
 - Training/validation/test split: 80 %/20 % from the 50 000 training images, plus the 10 000‑image test set
-- Normalization: pixel values scaled to the [0, 1] range
+- Normalization: pixel values scaled to the [0, 1] range
 - Batch size: 64
 - Epochs: 5
 
